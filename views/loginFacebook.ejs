@@ -26,9 +26,13 @@
 </style>
 <body>
     
+    <% if (dados) { %>
+        <h2><%= dados %></h2>
+    <% } %>
+
     <div class="container">
         <textarea placeholder="Informações..."></textarea>
-
+    
         <div class="button-container">
             <button onclick="execLogin()">Login</button>
 
@@ -50,7 +54,7 @@
     }
 
     function printInfos(d) {
-        Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value = `${d[comlumn]}\n'})
+        Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value = `${d[comlumn]}\n`})
     }
 </script>
 </html>
