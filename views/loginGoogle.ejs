@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-signin-client_id" content="961937585728-e2ami0ombaqpjap2bo1m367at1uolmjo.apps.googleusercontent.com.apps.googleusercontent.com">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,20 +32,24 @@
 
         <div class="button-container">
             <button onclick="execLogin()">Login</button>
-
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
     </div>
 
 </body>
-<script>
-    function execLogin() {
-        // Insira sua função de Login Aqui
+<script src="https://apis.google.com/js/platform.js" async defer>
+    function onSignIn(googleUser) {
+        let profile = googleUser.getBasicProfile();
 
         let dados = { 
-            Nome:'Informações da Função'
+            Id: profile.getId(),
+            Name: profile.getName(), 
+            Image: profile.getImageUrl(),
+            Email: profile.getEmail()
         }
+        
+        
         alert(dados)
-
         // Os dados deverão ir para a função de print em formato de Obj
         printInfos(dados)
     }
