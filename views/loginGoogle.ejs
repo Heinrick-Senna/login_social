@@ -58,7 +58,7 @@ function onSignIn(googleUser) {
     }
 
     function printInfos(d) {
-        Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value = `${d[comlumn]}\n`})
+        Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value =+ `\n ${d[comlumn]}\n`})
     }
 </script>
 </html>
