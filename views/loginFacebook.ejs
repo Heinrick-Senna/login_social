@@ -1,55 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
 </head>
-<style>
-    body {
-        width: 100vw;
-        max-width: 100vw;
-        overflow: hidden;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .container textarea {
-        width: 20vw;
-        height: 20vh;
-        margin-bottom: 1rem;
-    }
-
-</style>
 <body>
-    
-    <% if (dados) { %>
-        <h2><%= dados %></h2>
-    <% } %>
+<center>
+<h1>Login Page</h1>
 
-    <div class="container">
-        <textarea placeholder="Informações..."></textarea>
-    
-        <div class="button-container">
-            <button onclick="execLogin()">Login</button>
-
-        </div>
-    </div>
-
-</body>
 <script>
-    function execLogin() {
-        // Insira sua função de Login Aqui
+//Isso é chamado com os resultados de FB.getLoginStatus().
+function statusChangeCallback(response) {
+console.log('statusChangeCallback');
+console.log(response);
+////O objeto de resposta é retornado com um campo de status que permite ao
+// app saber o status de login atual da pessoa.().
+if (response.status === 'connected') {
+// Logado em seu aplicativo e Facebook.
+testAPI();
+} else if (response.status === 'not_authorized') {
+// A pessoa está conectada ao Facebook, mas não ao seu aplicativo.
+document.getElementById('status').innerHTML = 'Login with Facebook ';
+} else {
+// A pessoa não está conectada ao Facebook, então não temos certeza se
+// eles estão logados neste aplicativo ou não.
+document.getElementById('status').innerHTML = 'Login with Facebook ';
+}
+}
+// Esta função é chamada quando alguém termina com o Login
+// Botão. Veja o manipulador de onlogin anexado a ele no exemplo
+// código abaixo.
+function checkLoginState() {
+FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
+}
+window.fbAsyncInit = function() {
+FB.init({
+appId : '413572555717269',
+cookie : true, // habilitar cookies para permitir que o servidor acesse
+// a sessão
+xfbml : true, // analise os plug-ins sociais nesta página
+version : 'v2.2' // use a versão 2.2
+});
+// Agora que inicializamos o JavaScript SDK, chamamos
+// FB.getLoginStatus (). Esta função obtém o estado do
+// pessoa que visita esta página e pode retornar um dos três estados para
+// o retorno de chamada que você fornece. Eles podem ser:
+// 1. Logado em seu aplicativo ('conectado')
+// 2. Conectado ao Facebook, mas não em seu aplicativo ('not_authorized')
+// 3. Não está logado no Facebook e não posso dizer se ele está logado
+// seu aplicativo ou não.
+// Esses três casos são tratados na função de retorno de chamada.
 
-        let dados = { 
-            Nome:'Informações da Função'
-        }
+FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
+};
+// Carregar o SDK de forma assíncrona
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
-        // Os dados deverão ir para a função de print em formato de Obj
-        document.querySelector('textarea').value = JSON.stringify(dados).replaceAll(',', '\n')
-    }
+// Aqui, executamos um teste muito simples da API Graph depois que o login é
+// bem-sucedido. Veja statusChangeCallback () para saber quando esta chamada é feita.
+function testAPI() {
+console.log('Welcome! Fetching your information.... ');
+FB.api('/me?fields=name,email', function(response) {
+console.log('Successful login for: ' + response.name);
+
+document.getElementById("status").innerHTML = '<p>Welcome '+response.name+'! <a href=login.php?name='+ response.name.replace(" ", "_") +'&email='+ response.email +'>Continue with facebook login</a></p>'
+});
+}
 </script>
+<!--
+Abaixo, incluímos o plugin social do botão de login. Este botão usa
+o JavaScript SDK para apresentar um botão gráfico de Login que aciona
+a função FB.login () quando clicada.
+-->
+
+<div id="status">
+</div>
+<div class="container">
+    <textarea placeholder="Informações..."></textarea>
+
+    <div class="button-container">
+        <button onclick="execLogin()">Login</button>
+
+    </div>
+    
+</div>
+<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+<script type="text/javascript">
+</script>
+<script>
+
+
+
+function execLogin() {
+    
+FB.login(function(response){
+    FB.login(function(response) {
+}, {scope: 'public_profile,email'});
+});
+    // Insira sua função de Login Aqui
+    FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
+
+    let dados = { 
+        Nome:'Informações da Função',
+        scope: 'public_profile,email',
+
+    }
+    alert(dados)
+
+    // Os dados deverão ir para a função de print em formato de Obj
+    printInfos(dados)
+}
+
+function printInfos(d) {
+    Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value = `${d[comlumn]}\n`})
+}
+
+</script>
+</center>
+</body>
 </html>
