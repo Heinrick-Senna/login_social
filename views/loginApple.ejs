@@ -45,7 +45,7 @@
         }
 
         // Os dados deverão ir para a função de print em formato de Obj
-        document.querySelector('textarea').value = JSON.stringify(dados)
+        document.querySelector('textarea').value = JSON.stringify(dados).replace(',', '\n')
     }
 </script>
 </html>
