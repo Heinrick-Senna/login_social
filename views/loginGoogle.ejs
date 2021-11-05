@@ -53,12 +53,8 @@ function onSignIn(googleUser) {
         console.log("ID Token: " + id_token);
         
         alert(dados)
-        // Os dados deverão ir para a função de print em formato de Obj
-        printInfos(dados)
-    }
-
-    function printInfos(d) {
-        Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value =+ `\n ${d[comlumn]}\n`})
+       // Os dados deverão ir para a função de print em formato de Obj
+       document.querySelector('textarea').value = JSON.stringify(dados)
     }
 </script>
 </html>
