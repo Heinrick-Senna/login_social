@@ -6,14 +6,17 @@ const http = require('http');
 const https = require('https');
 const bodyParser = require('body-parser')
 const nets = require('os').networkInterfaces()
+const credentials = {}
 
-/* Global Variables */
-global.axios 	  = require('axios')
-global.baseurl 	= 'https://ENDPOINT-PARCEIRO'
+// Certificate
 if (process.argv[2] == undefined || process.argv[2] != '-dev') {
-  global.host 	  = 'https://ENDPOINT-DA-PRÓPRIA-APLICAÇÃO'
-} else {
-  global.host 	  = `http://${nets['Ethernet'][1].address}:3000/`
+  const privateKey = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/cert.pem', 'utf8');
+  const ca = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/chain.pem', 'utf8');
+  
+  credentials['key'] = privateKey
+  credentials['cert'] = certificate
+  credentials['ca'] = ca
 }
 
 const app = express()
@@ -46,6 +49,10 @@ if (process.argv[2] == undefined || process.argv[2] != '-dev') {
   const httpServer = http.createServer(app);
 
   httpServer.listen(80, console.log('HTTP Server running on port 80'))
+
+  const httpsServer = https.createServer(credentials, app);
+
+  httpsServer.listen(443, console.log('HTTPS Server running on port 443'))
 } else {
   const httpServer = http.createServer(app);
 
