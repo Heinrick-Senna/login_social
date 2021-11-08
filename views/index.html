@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        
+    <title>Facebook Authentication</title>
+
+    
+
+</head>
+
+<body>
+   
+<fb:login-button 
+scope="public_profile,email"
+onlogin="checkLoginState();">
+</fb:login-button>
+
+<div class="container">
+    <textarea placeholder="Informações..."></textarea>
+    
+</div>
+
+</body>
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '256183129812568',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v12.0'
+      });
+        
+     
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+
+     function statusCringeCallback(response) {
+if(response.status === 'connected'){
+    console.log(" logged in ")
+} else {
+    console.log("not logged in ")
+}
+     }
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+
+
+
+function execLogin() {
+    
+    FB.login(function(response){
+        FB.login(function(response) {
+    }, {scope: 'public_profile,email'});
+    });
+        // Insira sua função de Login Aqui
+        FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+    });
+    
+        let dados = { 
+            Nome:'Informações da Função',
+            scope: 'public_profile,email',
+    
+        }
+        alert(dados)
+    
+        // Os dados deverão ir para a função de print em formato de Obj
+        printInfos(dados)
+    }
+    
+function printInfos(d) {
+    Object.keys(d).forEach(comlumn => {document.querySelector('textarea').value = `${d[comlumn]}\n`})
+}
+    
+</script>
+</html>

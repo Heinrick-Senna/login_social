@@ -34,22 +34,21 @@ statusChangeCallback(response);
 });
 }
 window.fbAsyncInit = function() {
-FB.init({
-appId : '413572555717269',
-cookie : true, // habilitar cookies para permitir que o servidor acesse
-// a sessão
-xfbml : true, // analise os plug-ins sociais nesta página
-version : 'v2.2' // use a versão 2.2
-});
-// Agora que inicializamos o JavaScript SDK, chamamos
-// FB.getLoginStatus (). Esta função obtém o estado do
-// pessoa que visita esta página e pode retornar um dos três estados para
-// o retorno de chamada que você fornece. Eles podem ser:
-// 1. Logado em seu aplicativo ('conectado')
-// 2. Conectado ao Facebook, mas não em seu aplicativo ('not_authorized')
-// 3. Não está logado no Facebook e não posso dizer se ele está logado
-// seu aplicativo ou não.
-// Esses três casos são tratados na função de retorno de chamada.
+    FB.init({
+        appId      : '256183129812568',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v12.0'
+      });
+/* Agora que inicializamos o JavaScript SDK, chamamos
+ FB.getLoginStatus (). Esta função obtém o estado do
+ pessoa que visita esta página e pode retornar um dos três estados para
+ o retorno de chamada que você fornece. Eles podem ser:
+ 1. Logado em seu aplicativo ('conectado')
+ 2. Conectado ao Facebook, mas não em seu aplicativo ('not_authorized')
+ 3. Não está logado no Facebook e não posso dizer se ele está logado
+ seu aplicativo ou não.
+ Esses três casos são tratados na função de retorno de chamada. */
 
 FB.getLoginStatus(function(response) {
 statusChangeCallback(response);
