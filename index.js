@@ -36,6 +36,10 @@ app.get('/facebook', (req, res) => {
   res.render('loginFacebook', {dados: req.body})
 })
 
+app.get('/privacidade', (req, res) => {
+  res.render('privacidade')
+})
+
 app.get('/apple', (req, res) => {
   res.render('loginApple', {dados: req.body})
 })
