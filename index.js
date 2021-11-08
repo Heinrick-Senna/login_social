@@ -10,9 +10,9 @@ const credentials = {}
 
 // Certificate
 if (process.argv[2] == undefined || process.argv[2] != '-dev') {
-  const privateKey = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/cert.pem', 'utf8');
-  const ca = fs.readFileSync('/etc/letsencrypt/live/DOMINIO_DO_SITE/chain.pem', 'utf8');
+  const privateKey = fs.readFileSync('/etc/letsencrypt/live/server-login-social-ws.webstore.net.br/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/server-login-social-ws.webstore.net.br/cert.pem', 'utf8');
+  const ca = fs.readFileSync('/etc/letsencrypt/live/server-login-social-ws.webstore.net.br/chain.pem', 'utf8');
   
   credentials['key'] = privateKey
   credentials['cert'] = certificate
@@ -34,6 +34,10 @@ app.get('/google', (req, res) => {
 
 app.get('/facebook', (req, res) => {
   res.render('loginFacebook', {dados: req.body})
+})
+
+app.get('/privacidade', (req, res) => {
+  res.render('privacidade')
 })
 
 app.get('/apple', (req, res) => {
