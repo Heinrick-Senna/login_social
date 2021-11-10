@@ -24,6 +24,8 @@
         margin-bottom: 1rem;
     }
 
+    
+
 </style>
 <body>
     
@@ -31,8 +33,8 @@
         <textarea placeholder="Informações..." value="teste"></textarea>
 
         <div class="button-container">
-            <button>Teste</button>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <button class="teste">Teste</button>
+            <div style="display: none !important;" class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
     </div>
 
@@ -55,6 +57,15 @@ function onSignIn(googleUser) {
         alert(dados)
        // Os dados deverão ir para a função de print em formato de Obj
        document.querySelector('textarea').value = JSON.stringify(dados).replaceAll(',', '\n')
-    }
+       
+}
+
+function click(){
+
+    let teste = document.querySelector('.teste')
+    teste.onclick = function clicando(){ document.querySelector('.abcRioButtonContentWrapper').click()} 
+}
+
+click()
 </script>
 </html>
