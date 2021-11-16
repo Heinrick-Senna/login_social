@@ -67,8 +67,7 @@
       xhr.onload = function () {
         console.log("Signed in as: " + xhr.responseText);
       };
-      xhr.send("idtoken=" + id_token);
-      xhr.send("clientid=" + '961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com');
+      xhr.send("idtoken=" + id_token + '&clientid=' + '961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com');
     }
 
     function click() {
