@@ -36,8 +36,9 @@ app.get('/google', (req, res) => {
 
 app.post('/google/tokensignin', async (req, res) => {
   try {
-
-    async function verify(token, CLIENT_ID) {
+    const token = req.body.idtoken, CLIENT_ID = req.body.clientid
+    const client = new OAuth2Client(CLIENT_ID);
+    async function verify() {
       const ticket = await client.verifyIdToken({
         idToken: token,
         audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
@@ -50,13 +51,14 @@ app.post('/google/tokensignin', async (req, res) => {
       // const domain = payload['hd'];
     }
     
-    let result = await verify(req.body.idtoken, '961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com')
+    let result = await verify()
     
     console.log(result)
 
     res.send('sucesso')
   } catch (err) {
-    res.send('erro:', err)
+    console.log(err)
+    res.send('err')
   }
   })
 
