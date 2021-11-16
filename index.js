@@ -8,6 +8,8 @@ const bodyParser = require('body-parser')
 const nets = require('os').networkInterfaces()
 const credentials = {}
 
+const {OAuth2Client} = require('google-auth-library');
+
 // Certificate
 if (process.argv[2] == undefined || process.argv[2] != '-dev') {
   const privateKey = fs.readFileSync('/etc/letsencrypt/live/server-login-social-ws.webstore.net.br/privkey.pem', 'utf8');
@@ -32,10 +34,31 @@ app.get('/google', (req, res) => {
   res.render('loginGoogle', {dados: req.body})
 })
 
-app.post('/google/tokensignin', (req, res) => {
-  console.log(req)
-  res.send('teste')
-})
+app.post('/google/tokensignin', async (req, res) => {
+  try {
+
+    async function verify(token, CLIENT_ID) {
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+      });
+      const payload = ticket.getPayload();
+      const userid = payload['sub'];
+      // If request specified a G Suite domain:
+      // const domain = payload['hd'];
+    }
+    
+    let result = await verify(req.body.idtoken, '961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com')
+    
+    console.log(result)
+
+    res.send('sucesso')
+  } catch (err) {
+    res.send('erro:', err)
+  }
+  })
 
 app.get('/facebook', (req, res) => {
   res.render('loginFacebook', {dados: req.body})
