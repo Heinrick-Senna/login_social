@@ -32,6 +32,11 @@ app.get('/google', (req, res) => {
   res.render('loginGoogle', {dados: req.body})
 })
 
+app.post('/google/tokensignin', (req, res) => {
+  console.log(req)
+  res.send('teste')
+})
+
 app.get('/facebook', (req, res) => {
   res.render('loginFacebook', {dados: req.body})
 })
