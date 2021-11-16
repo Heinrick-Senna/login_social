@@ -1,71 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="google-signin-client_id" content="961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta
+      name="google-signin-client_id"
+      content="961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<style>
+  </head>
+  <style>
     body {
-        width: 100vw;
-        max-width: 100vw;
-        overflow: hidden;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      width: 100vw;
+      max-width: 100vw;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container textarea {
-        width: 20vw;
-        height: 20vh;
-        margin-bottom: 1rem;
+      width: 20vw;
+      height: 20vh;
+      margin-bottom: 1rem;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <textarea placeholder="Informações..." value="teste"></textarea>
+
+      <div class="button-container">
+        <button class="teste">Teste</button>
+        <div
+          style="display: none !important"
+          class="g-signin2"
+          data-onsuccess="onSignIn"
+        ></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script>
+    function onSignIn(googleUser) {
+      let profile = googleUser.getBasicProfile();
+      let id_token = googleUser.getAuthResponse().id_token;
+
+      let dados = {
+        Id: profile.getId(),
+        Name: profile.getName(),
+        Image: profile.getImageUrl(),
+        Email: profile.getEmail(),
+      };
+      let id_token = googleUser.getAuthResponse().id_token;
+      console.log("ID Token: " + id_token);
+
+      // Os dados deverão ir para a função de print em formato de Obj
+      document.querySelector("textarea").value = JSON.stringify(
+        dados
+      ).replaceAll(",", "\n");
+
+      // Enviando token para o backend
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://server-login-social-ws.webstore.net.br/google/tokensignin");
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onload = function () {
+        console.log("Signed in as: " + xhr.responseText);
+      };
+      xhr.send("idtoken=" + id_token);
     }
 
-    
+    function click() {
+      let teste = document.querySelector(".teste");
+      teste.onclick = function clicando() {
+        document.querySelector(".abcRioButtonContentWrapper").click();
+      };
+    }
 
-</style>
-<body>
-    
-    <div class="container">
-        <textarea placeholder="Informações..." value="teste"></textarea>
-
-        <div class="button-container">
-            <button class="teste">Teste</button>
-            <div style="display: none !important;" class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
-    </div>
-
-</body>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script>
-
-function onSignIn(googleUser) {
-        let profile = googleUser.getBasicProfile();
-
-        let dados = { 
-            Id: profile.getId(),
-            Name: profile.getName(), 
-            Image: profile.getImageUrl(),
-            Email: profile.getEmail()
-        }
-        let id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        
-        alert(dados)
-       // Os dados deverão ir para a função de print em formato de Obj
-       document.querySelector('textarea').value = JSON.stringify(dados).replaceAll(',', '\n')
-       
-}
-
-function click(){
-
-    let teste = document.querySelector('.teste')
-    teste.onclick = function clicando(){ document.querySelector('.abcRioButtonContentWrapper').click()} 
-}
-
-click()
-</script>
+    click();
+  </script>
 </html>
