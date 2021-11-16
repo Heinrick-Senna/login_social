@@ -65,7 +65,11 @@
       xhr.open("POST", "/google/tokensignin");
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.onload = function () {
-        console.log("Signed in as: " + xhr.responseText);
+        if (xhr.responseText == 'sucess') {
+          alert('Válido')
+        } else {
+          alert('Inválido')
+        }
       };
       xhr.send("idtoken=" + id_token + '&clientid=' + '961937585728-r7kc3mjg37jl4gjj0kk95ic1bo693n2u.apps.googleusercontent.com');
     }

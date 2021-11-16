@@ -51,13 +51,11 @@ app.post('/google/tokensignin', async (req, res) => {
       // const domain = payload['hd'];
     }
     
-    let result = await verify()
-    
-    console.log(result)
+    await verify()
 
-    res.send('sucesso')
+    res.send('sucess')
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
     res.send('err')
   }
   })
