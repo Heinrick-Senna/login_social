@@ -34,10 +34,11 @@
       <div class="button-container">
         <button class="teste">Teste</button>
         <div
-          style="display: none !important"
+          style="display: none !important "
           class="g-signin2"
           data-onsuccess="onSignIn"
         ></div>
+        <button class="botaoDeslogar">deslogar</button>
       </div>
     </div>
   </body>
@@ -81,6 +82,12 @@
       };
     }
 
+    function deslogar(){
+      let botao = document.querySelector(".botaoDeslogar")
+      botao.onclick = () => { gapi.auth2.getAuthInstance().disconnect()}
+    }
+
+    deslogar()
     click();
   </script>
 </html>
