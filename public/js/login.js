@@ -229,16 +229,16 @@ function limpandoConfigurando() {
 };
 
 function onSignIn(googleUser) {
+	console.log('iniciando onSignIn')
 	let profile = googleUser.getBasicProfile();
 	let id_token = googleUser.getAuthResponse().id_token;
+
 	let dados = {
 	  Id: profile.getId(),
 	  Name: profile.getName(),
 	  Image: profile.getImageUrl(),
 	  Email: profile.getEmail(),
 	};
-	console.log('dasdasasddasasdds' + dados)
-	console.log("ID Token: " + id_token);
 
 	document.querySelector("#input_login_loja").value = dados.Email
 	
