@@ -2,7 +2,6 @@ let endpointAxios = "https://adminloja.webstore.net.br";
 let etapa_atual = null;
 try { etapa_atual = localStorage.etapa; } catch (e) { console.log(e) };
 const variaveis = new ConjuntoVariaveis();
-escondendoElemento(variaveis.pinMfa,  variaveis.botaoGoogle);
 function esvaziandoElemento(...elementos){
 	elementos.forEach((elm)=>{
 		elm.innerHTML = ''
@@ -36,7 +35,7 @@ window.onload =	function () {
 				storage.clear();
             }
 
-			document.querySelector("#pin_MFA").classList.add('escondendoElemento');
+			escondendoElemento(variaveis.pinMfa);
 
 			!etapa_atual && etapa_atual == "1" ? NomeDominio() : console.log()
 			// if (!etapa_atual && etapa_atual == "1") {
@@ -87,7 +86,7 @@ window.onload =	function () {
 				document.querySelector('#btn_avancar').click();
 				document.querySelector("#input_senha_loja").focus();
 			}	
-
+			clickGoogle()
 		} catch (err) {
 			alert(err.message);
 		}
@@ -118,7 +117,7 @@ function NomeDominio() {
 	esvaziandoElemento(variaveis.mostraMsg, variaveis.erros, variaveis.suaLojaSpan);
 	botaoparaAvancar(variaveis.botaoAvancar);
 	mostraElemento(variaveis.nomeLoja);
-	escondendoElemento(variaveis.trocarLoja, variaveis.loginLoja, variaveis.senhaLoja, variaveis.suaLoja, variaveis.linkForget, variaveis.botaoGoogle);
+	escondendoElemento(variaveis.trocarLoja, variaveis.loginLoja, variaveis.senhaLoja, variaveis.suaLoja, variaveis.linkForget, variaveis.botaoGoogle, variaveis.pinMfa);
 
 	let inputNomeLoja = document.querySelector('#input_nome_loja');
 	inputNomeLoja.value = '';
@@ -240,9 +239,13 @@ function onSignIn(googleUser) {
 	};
 	console.log('dasdasasddasasdds' + dados)
 	console.log("ID Token: " + id_token);
+
+	document.querySelector("#input_login_loja").value = dados.Email
 	
 	document.querySelector("#input_login_loja").value = JSON.stringify(dados.Email);
-	
+
+	EmailSenha(true, id_token, 'google');
+
 	// var xhr = new XMLHttpRequest();
 	// xhr.open("POST", "/google/tokensignin");
 	// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -254,7 +257,7 @@ function onSignIn(googleUser) {
 	//   }
 	// };
 	// xhr.send("idtoken=" + id_token + '&clientid=' + '863561537270-jhvt2k5a6ifsted8dh5j5gmi5tgca7ec.apps.googleusercontent.com');
-}
+};
 
 function clickGoogle() {
 	console.log('Funcionando botão google')
@@ -262,24 +265,21 @@ function clickGoogle() {
 	botaoGoogle.onclick = function clicando() {
 	  document.querySelector(".abcRioButtonContentWrapper").click();
 	};
-}
+};
 
-function EmailSenha() {
+function EmailSenha(nopass, socialtoken, socialtype) {
 	esvaziandoElemento(variaveis.erros)
 	if (etapa_atual == '2') {
 
 		if (document.querySelector('#input_login_loja').value == '') {
 			document.querySelector('#login_loja .errors').innerHTML = 'Campo obrigatório';
 			return;
-		}
+		};
 
-		if (document.querySelector('#input_senha_loja').value == '') {
+		if (document.querySelector('#input_senha_loja').value == '' && !nopass) {
 			document.querySelector('#senha_loja .errors').innerHTML = 'Campo obrigatório';
 			return;
-		}
-	
-		clickGoogle();
-		onSignIn();
+		};
 		
 		var loja = lvID;
 		var login = document.querySelector('#input_login_loja').value.trim();
@@ -292,7 +292,6 @@ function EmailSenha() {
 			plus = "&appauthtype=" + urlPage.split("appauthtype=")[1];
 		};
 
-		alert('testando dados' + urlPage + plus)
 
 		if (loja == "" || loja == undefined || loja == null) {
 			VerificandoDominio(); return false;
@@ -306,6 +305,9 @@ function EmailSenha() {
 			dataenviadados.append('login', login);
 			dataenviadados.append('senha', senha);
 			dataenviadados.append('pin', pin);
+			dataenviadados.append('socialtype', socialtype);
+			dataenviadados.append('socialtoken', socialtoken);
+
 
 			let config = {
 				method: 'POST',
@@ -322,7 +324,7 @@ function EmailSenha() {
 			}).then((data)=>{
 				if (data.indexOf("SUCESSO") >= 0) {
 					url = data.replace("SUCESSO:", "");
-					document.location.href =  urlPage + plus;
+					document.location.href = endpointAxios + url + plus;
 				}
 					else if (data.indexOf("MFA") >= 0) {
 	
