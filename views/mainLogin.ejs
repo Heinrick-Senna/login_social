@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Faça o login em sua loja virtual - Webstore</title>
+	<link rel="stylesheet" href="/css/reset.css">
+	<link href="https://fonts.googleapis.com/css?family=Be+Vietnam:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/login.css">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="google-signin-client_id" content="863561537270-jhvt2k5a6ifsted8dh5j5gmi5tgca7ec.apps.googleusercontent.com"/>
+	<link id="favicon" rel="shortcut icon" type="image/png" href="https://painel.webstore.net.br/painel/images/painel2017/favicon.png">
+
+</head>
+
+<body>
+
+	<div class="fundo-login"></div>
+
+	<div class="login-container">
+
+		<img src="https://www.webstore.com.br/wp-content/themes/ws/assets/img/logo-webstore.svg" alt="Webstore" class="login-logo">
+
+		<div class="login-box">
+
+			<div class="login-form">
+
+				<h1>Gerencie sua loja virtual</h1>
+				<div id="sua_loja">
+					<div class="box-sua-loja">
+						<span></span>
+						<a href="javascript:void(0)" class="link-change" id="trocar_loja">Trocar loja</a>
+					</div>
+					<div class="link-form">
+
+					</div>
+				</div>
+
+				<p id="ShowMsg"></p>
+
+				<form class="" action="" method="post">
+					<div class="form-input" id="nome_loja">
+						<label for="input_nome_loja">Nome ou domínio da Loja</label>
+						<input type="text" name="nome_loja" id="input_nome_loja" autocomplete="off" value="" required placeholder="minhaloja.com.br">
+						<div class="errors"></div>
+					</div>
+					<div class="form-input" id="login_loja">
+						<label for="input_login_loja">Usuário ou e-mail</label>
+						<input type="text" name="login_loja" id="input_login_loja" autocomplete="off" value="" required placeholder="contato@minhaloja.com.br">
+						<div class="errors"></div>
+					</div>
+					<div class="form-input" id="senha_loja">
+						<label for="input_senha_loja">Senha</label>
+						<input type="password" name="senha_loja" id="input_senha_loja" autocomplete="off" value="" required placeholder="******">
+						<div class="errors"></div>
+					</div>
+					<div class="form-input" id="pin_MFA">
+						<label for="input_pin_mfa">PIN de validação de dois fatores</label>
+						<input type="text" name="pin_mfa" id="input_pin_mfa" autocomplete="off" value="" required placeholder="000 000">
+						<div class="errors"></div>
+					</div>
+
+					<div class="form-input">
+						<div class="loading" id="loading"><img src="/images/loading.gif" /></div>
+						<button type="button" name="avancar"  id="btn_avancar" disabled>Avançar</button>
+						<button id="botaoGoogle">Entrar com Google</button>
+						<div
+						style= "display: none !important";
+						class="g-signin2";
+						data-onsuccess="onSignIn";></div>
+					</div>
+				</form>
+				<div class="link-form box-link-forget" data-tipo-campo="links-down">
+					<a href="javascript:void(lembrarSenha())" class="link-forget">Esqueci a senha</a>
+					<a href="javascript:void(VerificandoDominio())" class="link-back">Voltar</a>
+				</div>
+				<div class="link-form" data-tipo-campo="links-down">
+					Ainda não tem uma loja virtual?<br>
+					<a href="https://www.webstore.com.br/criar-loja/" target="_blank" class="link-register">Crie agora e avalie por 10 dias grátis!</a>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="/js/vars.js" ></script>
+	<script type="text/javascript" src="/js/login.js?20210925G"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="./node_modules/axios/dist/axios.min.js"></script>
+	<script>
+		window.intercomSettings = {
+			app_id: "m7gmpufz"
+		};
+	</script>
+
+	<script>
+		// We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/m7gmpufz'
+		(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/m7gmpufz'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();
+	</script>
+
+</body>
+
+</html>

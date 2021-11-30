@@ -1,0 +1,264 @@
+html,
+body,
+.login-container,
+.login-box
+ {
+	min-height: 100%;
+}
+
+.loading {
+	margin: 0 auto;
+	text-align: center;
+}
+.loading img {
+	width: 50px;
+}
+
+#loading{
+	display:none;
+}
+
+body {
+	font-family: 'Be Vietnam', sans-serif;
+	color: #333333;
+	line-height: normal;
+	background-color: #ff8809;
+	background-color:#f3f4f5;
+	
+	/*background-color: #9092ff;*/
+}
+
+.fundo-login {
+	background-image: url('https://www.webstore.com.br/wp-content/uploads/2020/03/bg.png');
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-size: contain;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 67%;
+	height: 100%;
+}
+
+a {
+	color: #ff8809;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+
+.login-container h1 {
+	font-size: 26px;
+	text-align: center;
+	color: #ff8809;
+	color:#666;
+	font-weight: normal;
+	margin-bottom: 30px;
+}
+
+.login-box {
+	width: 33%;
+	background-color: #FFFFFF;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	-webkit-box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.login-logo {
+	position: absolute;
+	top:30px;
+	left:calc(16.5% - 90px);
+	z-index: 99;
+	width: 180px;
+}
+
+.login-form {
+	width: 80%;
+	background-color: #FFFFFF;
+}
+
+.form-input {
+	display: block;
+	margin: 10px 0;
+}
+
+.form-input #botaoGoogle{
+	display: none;
+}
+
+.form-input label {
+	display: block;
+	font-size: 15px;
+	margin-bottom: 6px;
+}
+
+.form-input input {
+	border: 1px solid #CCCCCC;
+	box-shadow: none;
+	color: #333333;
+	border-radius: 0px;
+	padding: 10px;
+	height: 26px;
+	font-size: 15px;
+	width: calc(100% - 20px);
+}
+
+
+.form-input input::placeholder {
+	color: #CCCCCC;
+}
+
+.form-input .errors {
+	color: #C00;
+	font-size: 13px;
+}
+
+	.form-input button:disabled,
+	.form-input input[type="submit"]:disabled {
+		opacity: 1;
+		color: #1c5973;
+		font-weight: 500;
+	}
+
+.form-input button,
+.form-input input[type="submit"] {
+	width: 100%;
+	background-color: #ff8809;
+	background-color:#2e83a8;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 14px;
+	border-radius: 0px;
+	border: none;
+	padding: 10px 0;
+	text-transform: uppercase;
+	cursor: pointer;
+	margin: 20px 0;
+	opacity: 1;
+}
+
+.form-input button {
+	margin-bottom: 0;
+}
+
+.link-form {
+	font-size: 14px;
+	color: #666;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	margin-top: 10px;
+}
+
+
+#trocar_loja,
+#login_loja,
+#senha_loja,
+.link-forget,
+.link-back {
+	display: none;
+}
+
+.box-link-forget {
+	margin-bottom: 5px;
+	padding-bottom: 10px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+#sua_loja {
+	display: none;
+	text-align: center;
+	padding: 4px;
+	font-size: 16px;
+}
+
+#sua_loja span {
+	font-weight: bold;
+	/* color: #ff8809; */
+	color:#999;
+}
+
+.box-sua-loja {
+	border-bottom: 1px solid #e8e8e8;
+	border-radius: 0px;
+	padding: 6px 14px;
+	/* display: inline-block; */
+	background: #fff;
+	font-size:12px;
+	color:#666;
+	text-align:left;
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.box-sua-loja #trocar_loja {
+	float:right;
+	font-size:12px;
+}
+
+.align-center {
+	text-align: center;
+}
+
+#ShowMsg {
+	color: #C00;
+  margin: 30px auto;
+  margin-top: 15px;
+  font-size: 18px;
+  text-align: center;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+	body {
+		background-position: 100px center;
+	}
+	.login-box {
+		width: 50%;
+		padding-top: 50px;
+	}
+	.login-logo {
+		left:calc(25% - 90px);
+	}
+	.fundo-login {
+		width: 50%;
+	}
+
+}
+
+@media screen and (max-width: 950px) {
+	body {
+		background-color: #FFFFFF;
+		background-image: none;
+		height: auto;
+	}
+	.login-box {
+		width: 100%;
+		background-color: transparent;
+		overflow: scroll;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+	.login-form {
+		max-width:500px;
+		
+	}
+	.login-container h1 {
+		font-size: 30px;
+	}
+	.login-logo {
+		left:calc(50% - 90px);
+	}
+	.fundo-login {
+		display:none;
+	}
+}

@@ -23,6 +23,7 @@ if (process.argv[2] == undefined || process.argv[2] != '-dev') {
 
 const app = express()
 app.use(express.static(__dirname, { dotfiles: 'allow' } ));
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -32,6 +33,10 @@ app.use(cors())
 // Include Routas
 app.get('/google', (req, res) => {
   res.render('loginGoogle', {dados: req.body})
+})
+
+app.get('/loginGoogle', (req, res)=> {
+    res.render('mainLogin');
 })
 
 app.post('/google/tokensignin', async (req, res) => {
@@ -58,7 +63,7 @@ app.post('/google/tokensignin', async (req, res) => {
     console.log(err.message)
     res.send('err')
   }
-  })
+})
 
 app.get('/facebook', (req, res) => {
   res.render('loginFacebook', {dados: req.body})

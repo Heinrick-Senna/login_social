@@ -1,0 +1,290 @@
+/*=========================================*/
+/*GERAL*/
+
+@media screen {
+
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        border: 0px;
+        text-decoration: none;
+        font-weight: 300;
+        transition: all 0.3s;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+    }
+
+}
+
+/*FIM GERAL*/
+/*=========================================*/
+
+
+
+
+
+
+
+
+/*=========================================*/
+/* TOPO */
+
+@media screen{
+    .DivGeral{
+    }
+
+    .DivGeral .Controle{
+    }
+
+    .DivGeral .Controle .Topo {
+        max-width: 1300px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .DivGeral .Controle .Topo h1{
+        margin-top : 20px;
+        display: block;
+    }
+
+        .DivGeral .Controle .Topo .Logo a {
+            display: block;
+            overflow: hidden;
+            text-indent: -120000px;
+            width: 144px;
+            height: 42px;
+            width: 147px;
+            height: 22px;
+            background-image: url(/painel/images/login/Logo.png);
+            background-image: url(/painel/images/Painel2019/Logotipo-Webstore-2019.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size:cover;
+            position: relative;
+            margin: 0px auto;
+            cursor: default;
+        }
+
+}
+
+/*FIM TOPO */
+/*=========================================*/
+
+
+
+
+
+
+
+
+/*=========================================*/
+/*ESTRUTURA*/
+
+@media screen {
+    .DivGeral .DivEstrutura {
+        display: table;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -230px;
+        margin-top: -219px;
+    }
+
+        .DivGeral .DivEstrutura .Painel {
+            margin-top: 0px;
+        }
+
+            .DivGeral .DivEstrutura .Painel span {
+                display: none;
+            }
+
+            .DivGeral .DivEstrutura .Painel #ShowMsg {
+                display: table;
+                color: #f5821f;
+                position: relative;
+                margin: 0px auto;
+                margin-top: 15px;
+                font-size: 18px;
+                font-weight: 300;
+            }
+
+            .DivGeral .DivEstrutura .Painel h2 {
+                display: table;
+                position: relative;
+                margin: 0px auto;
+                font-size: 36px;
+                color: #999999;
+                margin-bottom: 30px;
+                cursor:default;
+            }
+
+        .DivGeral .DivEstrutura input {
+            background-color: #eaeaea;
+            display: table;
+            position: relative;
+            margin: 0px auto;
+            width: 460px;
+            height: 65px;
+            border: 1px solid #CCC;
+            margin-top: 15px;
+            padding-left: 20px;
+            font-size: 18px;
+            border-radius: 3px;
+            color: #333333;
+        }
+
+            .DivGeral .DivEstrutura input:focus {
+                border: 1px solid #f58220;
+                box-shadow:0px 0px 3px #f58220;
+                background-color:#FFF;
+            }
+
+        .DivGeral .DivEstrutura .DivsInputs:before {
+            display:block;
+            content:attr(title);
+            font-size:16px;
+            margin-top:15px;
+            margin-bottom:-10px;
+        }
+
+    input[type=text].CampoInvalido {
+        background-color: #f58220;
+    }
+
+        input[type=text].CampoInvalido::-webkit-input-placeholder {
+            color: #fff;
+        }
+
+    input[type=password].CampoInvalido {
+        background-color: #f58220;
+    }
+
+        input[type=password].CampoInvalido::-webkit-input-placeholder {
+            color: #fff;
+        }
+
+    .DivGeral .DivEstrutura .BotaoEntrar a {
+        background-color: #1dd614;
+        color: #fff;
+        display: table;
+        position: relative;
+        margin: 0px auto;
+        width: 310px;
+        height: 65px;
+        margin-top: 15px;
+        font-size: 24px;
+        font-weight: 400;
+        padding-top: 15px;
+        border-radius: 4px;
+        text-align:center;
+    }
+
+        .DivGeral .DivEstrutura .BotaoEntrar a:hover {
+            background-color: #1bc412;
+        }
+
+    .DivGeral .DivEstrutura .Esqueci a {
+        color: #f5821f;
+        display: table;
+        position: relative;
+        margin: 0px auto;
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: 300;
+    }
+
+        .DivGeral .DivEstrutura .Esqueci a:hover {
+            text-decoration: underline;
+        }
+
+    .DivGeral .DivEstrutura .Cadastro a {
+        color: #666;
+        display: table;
+        position: relative;
+        margin: 0px auto;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+        .DivGeral .DivEstrutura .Cadastro a:hover {
+            text-decoration: underline;
+        }
+}
+
+@media screen and (max-height: 600px) {
+    .DivGeral .DivEstrutura {
+        display: table;
+        top: 80px;
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .DivGeral .DivEstrutura .Painel {
+        margin-top: 50px;
+    }
+
+    .DivGeral .DivEstrutura {
+        display: table;
+        position: relative;
+        left: initial;
+        top: initial;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .DivGeral .DivEstrutura .Painel h2 {
+        font-size: 24px;
+        color: #999999;
+    }
+
+    .DivGeral .DivEstrutura input {
+        width: 95%;
+    }
+
+    .DivGeral .DivEstrutura .BotaoEntrar a {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .DivGeral .DivEstrutura .Painel {
+        margin-top: 30px;
+    }
+
+        .DivGeral .DivEstrutura .Painel h2 {
+            font-size: 24px;
+            color: #999999;
+            margin-bottom: 0px;
+        }
+
+    .DivGeral .DivEstrutura input {
+        width: 95%;
+    }
+
+    .DivGeral .DivEstrutura .BotaoEntrar a {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .DivGeral .DivEstrutura .Painel h2 {
+        text-align: center;
+    }
+
+    .DivGeral .DivEstrutura input {
+    }
+
+    .DivGeral .DivEstrutura .BotaoEntrar a {
+    }
+}
+
+
+/*FIM ESTRUTURA*/
+/*=========================================*/

@@ -44,6 +44,7 @@
   </body>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
+
     function onSignIn(googleUser) {
       let profile = googleUser.getBasicProfile();
       let id_token = googleUser.getAuthResponse().id_token;
@@ -54,7 +55,8 @@
         Image: profile.getImageUrl(),
         Email: profile.getEmail(),
       };
-      console.log("ID Token: " + id_token);
+
+      console.log(dados)
 
       // Os dados deverão ir para a função de print em formato de Obj
       document.querySelector("textarea").value = JSON.stringify(
@@ -83,11 +85,15 @@
     }
 
     function deslogar(){
-      let botao = document.querySelector(".botaoDeslogar")
-      botao.onclick = () => { gapi.auth2.getAuthInstance().disconnect()}
+      let botao = document.querySelector(".botaoDeslogar");
+      botao.onclick = () => {
+         gapi.auth2.getAuthInstance().disconnect();
+          
+      };
     }
 
-    deslogar()
+
+    deslogar();
     click();
   </script>
 </html>
