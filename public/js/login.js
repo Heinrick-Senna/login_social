@@ -1,6 +1,6 @@
 let endpointAxios = "https://adminloja.webstore.net.br";
 let etapa_atual = null;
-try { etapa_atual = localStorage.etapa; } catch (e) { console.log(e) };
+try { etapa_atual = localStorage.etapa; } catch (e) { };
 
 function getObject(id) {   
 	return document.querySelector(id)    
@@ -9,14 +9,12 @@ function getObject(id) {
 function esvaziandoElemento(...elementos){
 	elementos.forEach((elm)=>{
 		elm.innerHTML = ''
-		console.log('foi limpo!')
 	})
 };
 
 function escondendoElemento(...elementos){
 	elementos.forEach((elm)=>{
 		elm.style.display = 'none';
-		console.log('foi escondido!')
 	})
 };
 
@@ -39,15 +37,14 @@ window.onload =	function () {
 
 			escondendoElemento(getObject("#pin_MFA"));
 
-			!etapa_atual && etapa_atual == "1" ? NomeDominio() : console.log()
-			// if (!etapa_atual && etapa_atual == "1") {
-			// 	etapa_1();
-			// }
+			if (!etapa_atual && etapa_atual == "1") {
+				etapa_1();
+			}
 
 			if (etapa_atual == '2') {
 				VerificandoDominio();
 			} else {
-				try { localStorage.setItem("etapa", 1); } catch (e) { console.log(e) }
+				try { localStorage.setItem("etapa", 1); } catch (e) {  }
 				document.querySelector('#input_nome_loja').focus();
 			}
 
@@ -151,16 +148,13 @@ function VerificandoDominio() {
 			nome_loja = document.querySelector('#input_nome_loja').value;
 		}
 	} catch (e) { 
-		console.log(e)
 		nome_loja = docuemnt.querySelector('#input_nome_loja').value = ''.trim(); }
 
-	console.log(nome_loja)		
 	nome_loja = nome_loja.toLowerCase();
 
 	let nomeLOJAsend = nome_loja.replace(".", "_ponto_").replace(".", "_ponto_").replace(".", "_ponto_").replace(".", "_ponto_").replace(".", "_ponto_").replace(".", "_ponto_").replace(".", "_ponto_");
 	nomeLOJAsend = nome_loja.replace("www.", "").replace("http://", "").replace("https://", "");
 
-	console.log("nome_loja:" + nome_loja);
 
 	if (nome_loja == '') {
 
@@ -174,7 +168,6 @@ function VerificandoDominio() {
 		data.append('tipo', "verificaDominio");
 		data.append('loja', nomeLOJAsend);
 
-		console.log(data)
 
 
 		let config = {
@@ -192,7 +185,6 @@ function VerificandoDominio() {
 		  return response.data;
 		}).then((data)=>{
 			if(data.indexOf("SUCESSO:") >= 0) {	
-			console.log('deu certo!' + data);
 			lvID = data.split(':')[1];
 			limpandoConfigurando();
 			} else {
@@ -308,7 +300,6 @@ function VerificandoEmailSenha(nopass, socialtoken, socialtype) {
 			document.querySelector("#ShowMsg").innerHTML = "";
 
 			axios(config).then((response)=>{
-				console.log('resultado' + JSON.stringify(response))
 				return response.data
 			}).then((data)=>{
 				if (data.indexOf("SUCESSO") >= 0) {
@@ -357,13 +348,10 @@ function lembrarSenha() {
 			return;
 
 		} else {
-			console.log('ID -----------------' + lvID)
-			console.log('usuario -----------------' + usuario)
 			let datalembrarsenha = new FormData();
 			datalembrarsenha.append('lojaid', lvID)
 			datalembrarsenha.append('usuario', usuario)
 
-			console.log('data lembrar senha' + data)
 
 			let myheaderslembrarsenha = new Headers();
 			myheaderslembrarsenha.append("Cookie", "ASP.NET_SessionId=z5ymksyhexjim4gybd2zx0uy");
@@ -379,7 +367,6 @@ function lembrarSenha() {
 			funcLoading(true);
 
 			axios(config).then((response)=>{
-				console.log('resposta lembrar senha' + response.data)
 				return response.data
 			}).then((data)=>{
 				funcLoading(false);
