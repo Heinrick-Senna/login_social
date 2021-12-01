@@ -1,7 +1,11 @@
 let endpointAxios = "https://adminloja.webstore.net.br";
 let etapa_atual = null;
 try { etapa_atual = localStorage.etapa; } catch (e) { console.log(e) };
-const variaveis = new ConjuntoVariaveis();
+
+function getObject(id) {   
+	return document.querySelector(id)    
+};
+
 function esvaziandoElemento(...elementos){
 	elementos.forEach((elm)=>{
 		elm.innerHTML = ''
@@ -27,15 +31,13 @@ function mostraElemento(...elementos){
 };
 
 window.onload =	function () {
-
 		try {
-
 			let url = window.location.href;
 			if (url.indexOf("clear_login") >= 0) {
 				storage.clear();
             }
 
-			escondendoElemento(variaveis.pinMfa);
+			escondendoElemento(getObject("#pin_MFA"));
 
 			!etapa_atual && etapa_atual == "1" ? NomeDominio() : console.log()
 			// if (!etapa_atual && etapa_atual == "1") {
@@ -100,7 +102,7 @@ function avancar() {
 			VerificandoDominio();
 			break;
 		case '2':
-			EmailSenha();
+			VerificandoEmailSenha();
 			break;
 		case 'lembrar':
 			lembrarSenha();
@@ -114,12 +116,12 @@ function avancar() {
 function NomeDominio() {
 	document.querySelector('#btn_avancar').setAttribute('disabled', true);
 
-	esvaziandoElemento(variaveis.mostraMsg, variaveis.erros, variaveis.suaLojaSpan);
-	botaoparaAvancar(variaveis.botaoAvancar);
-	mostraElemento(variaveis.nomeLoja);
-	escondendoElemento(variaveis.trocarLoja, variaveis.loginLoja, variaveis.senhaLoja, variaveis.suaLoja, variaveis.linkForget, variaveis.botaoGoogle, variaveis.pinMfa);
+	esvaziandoElemento(getObject("#ShowMsg"), getObject('.errors'), getObject('#sua_loja span'));
+	botaoparaAvancar(getObject('#btn_avancar'));
+	mostraElemento(getObject('#nome_loja'));
+	escondendoElemento(getObject('#trocar_loja'), getObject('#login_loja'), getObject('#senha_loja'), getObject('#sua_loja'), getObject('.link-forget'), getObject('#botaoGoogle'), getObject("#pin_MFA"));
 
-	let inputNomeLoja = document.querySelector('#input_nome_loja');
+	let inputNomeLoja = getObject('#input_nome_loja');
 	inputNomeLoja.value = '';
 	inputNomeLoja.focus();
 
@@ -137,9 +139,9 @@ let lvID = "";
 function VerificandoDominio() {
 
 	console.log("VerificandoDominio iniciada");
-	esvaziandoElemento(variaveis.erros);
-	escondendoElemento(variaveis.linkBack, variaveis.botaoGoogle);
-	botaoparaAvancar(variaveis.botaoAvancar);
+	esvaziandoElemento(getObject('.errors'));
+	escondendoElemento(getObject('.link-back'), getObject('#botaoGoogle'));
+	botaoparaAvancar(getObject('#btn_avancar'));
 
 	try {
 		if (document.querySelector('#input_nome_loja').value == "" && localStorage.nome_loja) {
@@ -209,8 +211,8 @@ function limpandoConfigurando() {
 
 	try {
 		funcLoading(false);
-		escondendoElemento(variaveis.nomeLoja)
-		mostraElemento(variaveis.suaLoja, variaveis.linkForget, variaveis.trocarLoja, variaveis.loginLoja, variaveis.senhaLoja, variaveis.botaoGoogle)
+		escondendoElemento(getObject('#nome_loja'))
+		mostraElemento(getObject('#sua_loja'), getObject('.link-forget'), getObject('#trocar_loja'), getObject('#login_loja'), getObject('#senha_loja'), getObject('#botaoGoogle'))
 
 		document.querySelector('#input_login_loja').focus();
 
@@ -228,8 +230,8 @@ function limpandoConfigurando() {
 
 };
 
-function onSignIn(googleUser) {
-	console.log('iniciando onSignIn')
+function onSignInGoogle(googleUser) {
+	console.log('iniciando onSignInGoogle')
 	let profile = googleUser.getBasicProfile();
 	let id_token = googleUser.getAuthResponse().id_token;
 
@@ -240,23 +242,9 @@ function onSignIn(googleUser) {
 	  Email: profile.getEmail(),
 	};
 
-	document.querySelector("#input_login_loja").value = dados.Email
-	
-	document.querySelector("#input_login_loja").value = JSON.stringify(dados.Email);
+	document.querySelector("#input_login_loja").value = dados.Email;
 
-	EmailSenha(true, id_token, 'google');
-
-	// var xhr = new XMLHttpRequest();
-	// xhr.open("POST", "/google/tokensignin");
-	// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	// xhr.onload = function () {
-	//   if (xhr.responseText == 'sucess') {
-	// 	alert('Válido')
-	//   } else {
-	// 	alert('Inválido')
-	//   }
-	// };
-	// xhr.send("idtoken=" + id_token + '&clientid=' + '863561537270-jhvt2k5a6ifsted8dh5j5gmi5tgca7ec.apps.googleusercontent.com');
+	VerificandoEmailSenha(true, id_token, 'google');
 };
 
 function clickGoogle() {
@@ -267,8 +255,9 @@ function clickGoogle() {
 	};
 };
 
-function EmailSenha(nopass, socialtoken, socialtype) {
-	esvaziandoElemento(variaveis.erros)
+
+function VerificandoEmailSenha(nopass, socialtoken, socialtype) {
+	esvaziandoElemento(getObject('.errors'))
 	if (etapa_atual == '2') {
 
 		if (document.querySelector('#input_login_loja').value == '') {
@@ -328,8 +317,8 @@ function EmailSenha(nopass, socialtoken, socialtype) {
 				}
 					else if (data.indexOf("MFA") >= 0) {
 	
-						escondendoElemento(variaveis.loginLoja, variaveis.senhaLoja)
-						mostraElemento(variaveis.pinMfa)
+						escondendoElemento(getObject('#login_loja'), getObject('#senha_loja'))
+						mostraElemento(getObject("#pin_MFA"))
 						document.querySelector('#input_pin_mfa').focus();
 						funcLoading(false);
 																													
@@ -352,9 +341,9 @@ function lembrarSenha() {
 		try { localStorage.setItem("etapa", 'lembrar'); } catch (e) { }
 		etapa_atual = 'lembrar';
 
-		esvaziandoElemento(variaveis.erros);
-		escondendoElemento(variaveis.senhaLoja, variaveis.linkForget, variaveis.botaoGoogle);
-		mostraElemento(variaveis.linkBack);
+		esvaziandoElemento(getObject('.errors'));
+		escondendoElemento(getObject('#senha_loja'), getObject('.link-forget'), getObject('#botaoGoogle'));
+		mostraElemento(getObject('.link-back'));
 		document.querySelector('#btn_avancar').innerHTML = 'Lembrar Senha';
 
 	} else {
@@ -420,7 +409,6 @@ function funcLoading(tipo) {
 		document.querySelector("#btn_avancar").style.display = 'block';
 		document.querySelector("[data-tipo-campo='links-down']").style.display = 'block';
 	}
-
 };
 
 function TrataDescricoesEnviar(Valor) {
